@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Michel Zarpelon — Engenheiro de Software</title>
+<meta name="description" content="Michel Zarpelon, engenheiro de software.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Inter:wght@400;500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg: #12110F;
+    --surface: #1B1A17;
+    --line: #2B2924;
+    --text: #EDE9E0;
+    --muted: #9A948A;
+    --accent: #C98A3B;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:var(--bg);
+    color:var(--text);
+    font-family:'Inter', sans-serif;
+    min-height:100vh;
+    position:relative;
+    overflow-x:hidden;
+  }
+
+  /* blueprint grid backdrop */
+  .grid-bg{
+    position:fixed; inset:0;
+    background-image:
+      linear-gradient(var(--line) 1px, transparent 1px),
+      linear-gradient(90deg, var(--line) 1px, transparent 1px);
+    background-size: 64px 64px;
+    opacity:0.35;
+    mask-image: radial-gradient(ellipse 80% 60% at 30% 20%, black 0%, transparent 75%);
+    -webkit-mask-image: radial-gradient(ellipse 80% 60% at 30% 20%, black 0%, transparent 75%);
+    pointer-events:none;
+  }
+
+  main{
+    position:relative;
+    max-width:760px;
+    margin:0 auto;
+    padding:14vh 28px 12vh;
+  }
+
+  .eyebrow{
+    font-family:'JetBrains Mono', monospace;
+    font-size:0.8rem;
+    color:var(--accent);
+    letter-spacing:0.04em;
+    display:flex;
+    align-items:center;
+    gap:10px;
+    margin-bottom:28px;
+  }
+  .eyebrow::before{
+    content:"";
+    width:8px; height:8px;
+    background:var(--accent);
+    border-radius:50%;
+    box-shadow:0 0 0 3px rgba(201,138,59,0.18);
+  }
+
+  h1{
+    font-family:'Fraunces', serif;
+    font-weight:500;
+    font-size:clamp(2.6rem, 7vw, 4.6rem);
+    line-height:1.05;
+    letter-spacing:-0.01em;
+    margin-bottom:20px;
+  }
+
+  .terminal{
+    font-family:'JetBrains Mono', monospace;
+    font-size:clamp(0.95rem, 2.2vw, 1.15rem);
+    color:var(--muted);
+    margin-bottom:36px;
+    min-height:1.6em;
+  }
+  .terminal .prompt{ color:var(--accent); }
+  .cursor{
+    display:inline-block;
+    width:8px; height:1.1em;
+    background:var(--accent);
+    margin-left:2px;
+    vertical-align:text-bottom;
+    animation:blink 1s step-end infinite;
+  }
+  @keyframes blink{ 50%{ opacity:0; } }
+
+  p.bio{
+    font-size:1.08rem;
+    line-height:1.7;
+    color:var(--text);
+    max-width:56ch;
+    margin-bottom:56px;
+  }
+  p.bio strong{ color:var(--accent); font-weight:500; }
+
+  .links{
+    display:flex;
+    flex-wrap:wrap;
+    gap:14px;
+  }
+  .links a{
+    font-family:'JetBrains Mono', monospace;
+    font-size:0.9rem;
+    color:var(--text);
+    text-decoration:none;
+    padding:10px 18px;
+    border:1px solid var(--line);
+    border-radius:2px;
+    transition:border-color 0.2s ease, color 0.2s ease, transform 0.2s ease;
+  }
+  .links a:hover{
+    border-color:var(--accent);
+    color:var(--accent);
+    transform:translateY(-2px);
+  }
+
+  footer{
+    position:relative;
+    text-align:center;
+    padding:32px 28px 40px;
+    font-family:'JetBrains Mono', monospace;
+    font-size:0.75rem;
+    color:var(--muted);
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    .cursor{ animation:none; }
+    html{ scroll-behavior:auto; }
+  }
+</style>
+</head>
+<body>
+
+<div class="grid-bg"></div>
+
+<main>
+  <div class="eyebrow">DISPONÍVEL PARA NOVOS PROJETOS</div>
+
+  <h1>Michel<br>Zarpelon</h1>
+
+  <div class="terminal">
+    <span class="prompt">~$</span> <span id="typed"></span><span class="cursor"></span>
+  </div>
+
+  <p class="bio">
+    Engenheiro de software com foco em construir coisas que funcionam de verdade.
+    Trabalho principalmente com <strong>Java e Spring</strong>, e uso as noites para
+    tirar projetos próprios do papel — deste site em diante.
+  </p>
+
+  <div class="links">
+    <a href="https://github.com/michelzarpe" target="_blank" rel="noopener">GitHub</a>
+    <a href="https://www.linkedin.com/in/michel-zarpelon-38a8a5152" target="_blank" rel="noopener">LinkedIn</a>
+    <a href="mailto:contato@michelzarpelon.com.br">E-mail</a>
+  </div>
+</main>
+
+<footer>
+  michelzarpelon.com.br · desde 2026
+</footer>
+
+<script>
+  const phrases = ["engenheiro de software.", "construindo em michelzarpelon.com.br"];
+  const el = document.getElementById('typed');
+  let phraseIndex = 0, charIndex = 0, deleting = false;
+
+  function tick(){
+    const current = phrases[phraseIndex];
+    if(!deleting){
+      charIndex++;
+      el.textContent = current.slice(0, charIndex);
+      if(charIndex === current.length){
+        deleting = true;
+        setTimeout(tick, 1800);
+        return;
+      }
+    } else {
+      charIndex--;
+      el.textContent = current.slice(0, charIndex);
+      if(charIndex === 0){
+        deleting = false;
+        phraseIndex = (phraseIndex + 1) % phrases.length;
+      }
+    }
+    setTimeout(tick, deleting ? 35 : 55);
+  }
+  tick();
+</script>
+
+</body>
+</html>
