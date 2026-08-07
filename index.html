@@ -577,8 +577,8 @@
     <div class="stat-tile"><span class="stat-number">1</span><span class="stat-label">artigo científico publicado</span></div>
     <div class="stat-tile"><span class="stat-number">6</span><span class="stat-label">linguagens de programação dominadas</span></div>
     <div class="stat-tile"><span class="stat-number">3+</span><span class="stat-label">ferramentas de IA no fluxo de trabalho diário</span></div>
-    <div class="stat-tile"><span class="stat-number" id="statRepoCount">—</span><span class="stat-label">repositórios públicos no GitHub</span></div>
-    <div class="stat-tile"><span class="stat-number" id="statStarCount">—</span><span class="stat-label">estrelas conquistadas no GitHub</span></div>
+    <div class="stat-tile" id="statRepoTile"><span class="stat-number" id="statRepoCount">—</span><span class="stat-label">repositórios públicos no GitHub</span></div>
+    <div class="stat-tile" id="statStarTile"><span class="stat-number" id="statStarCount">—</span><span class="stat-label">estrelas conquistadas no GitHub</span></div>
   </div>
 
   <div class="itau-highlight">
@@ -826,6 +826,10 @@
     })
     .catch(() => {
       repoGrid.innerHTML = '<div class="repo-empty">Não foi possível carregar os repositórios agora.</div>';
+      const statRepoTile = document.getElementById('statRepoTile');
+      const statStarTile = document.getElementById('statStarTile');
+      if(statRepoTile) statRepoTile.style.display = 'none';
+      if(statStarTile) statStarTile.style.display = 'none';
     });
 
   // Copiar endereço BTC
