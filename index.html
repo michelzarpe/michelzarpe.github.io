@@ -464,6 +464,60 @@
   }
   .pub-meta a{ color:var(--accent); text-decoration:none; }
 
+  /* Big numbers */
+  .stats-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fill, minmax(160px, 1fr));
+    gap:14px;
+    margin-bottom:48px;
+  }
+  .stat-tile{
+    border:1px solid var(--line);
+    background:var(--surface);
+    padding:22px 18px;
+    border-radius:2px;
+    display:flex;
+    flex-direction:column;
+    gap:6px;
+    transition:border-color 0.2s ease, transform 0.2s ease;
+  }
+  .stat-tile:hover{
+    border-color:var(--accent);
+    transform:translateY(-2px);
+  }
+  .stat-number{
+    font-family:'Fraunces', serif;
+    font-weight:500;
+    font-size:clamp(1.5rem, 3.4vw, 2.1rem);
+    color:var(--accent);
+    line-height:1;
+  }
+  .stat-label{
+    font-family:'JetBrains Mono', monospace;
+    font-size:0.74rem;
+    color:var(--muted);
+    line-height:1.4;
+  }
+
+  .itau-highlight{
+    border:1px solid var(--accent);
+    background:rgba(201,138,59,0.06);
+    border-radius:2px;
+    padding:24px 24px 10px;
+    margin-bottom:48px;
+  }
+  .itau-highlight-label{
+    font-family:'JetBrains Mono', monospace;
+    font-size:0.8rem;
+    color:var(--accent);
+    letter-spacing:0.04em;
+    margin-bottom:18px;
+  }
+  .itau-highlight .stats-grid{ margin-bottom:14px; }
+  .itau-highlight .stat-tile{
+    background:var(--bg);
+  }
+
   footer{
     position:relative;
     text-align:center;
@@ -507,6 +561,38 @@
 </main>
 
 <section class="projects">
+  <div class="section-label">~/números</div>
+  <div class="stats-grid">
+    <div class="stat-tile"><span class="stat-number">18+</span><span class="stat-label">anos de carreira em TI</span></div>
+    <div class="stat-tile"><span class="stat-number">12</span><span class="stat-label">anos como desenvolvedor de software</span></div>
+    <div class="stat-tile"><span class="stat-number">7</span><span class="stat-label">empresas e times por onde passei</span></div>
+    <div class="stat-tile"><span class="stat-number">82</span><span class="stat-label">certificações concluídas</span></div>
+    <div class="stat-tile"><span class="stat-number">49</span><span class="stat-label">tecnologias no portfólio de skills</span></div>
+    <div class="stat-tile"><span class="stat-number">17</span><span class="stat-label">cursos em Data Science Academy (ML, Deep Learning, Blockchain)</span></div>
+    <div class="stat-tile"><span class="stat-number">28</span><span class="stat-label">cursos concluídos na Udemy</span></div>
+    <div class="stat-tile"><span class="stat-number">16</span><span class="stat-label">cursos concluídos na Alura</span></div>
+    <div class="stat-tile"><span class="stat-number">3</span><span class="stat-label">certificações Datadog em observabilidade</span></div>
+    <div class="stat-tile"><span class="stat-number">5</span><span class="stat-label">formações acadêmicas (bacharelado + pós/extensões)</span></div>
+    <div class="stat-tile"><span class="stat-number">2</span><span class="stat-label">pós-graduações simultâneas em andamento</span></div>
+    <div class="stat-tile"><span class="stat-number">1</span><span class="stat-label">artigo científico publicado</span></div>
+    <div class="stat-tile"><span class="stat-number">~8k</span><span class="stat-label">usuários na feira de tecnologia Gera019</span></div>
+    <div class="stat-tile"><span class="stat-number">6</span><span class="stat-label">linguagens de programação dominadas</span></div>
+    <div class="stat-tile"><span class="stat-number">3+</span><span class="stat-label">ferramentas de IA no fluxo de trabalho diário</span></div>
+    <div class="stat-tile"><span class="stat-number" id="statRepoCount">—</span><span class="stat-label">repositórios públicos no GitHub</span></div>
+    <div class="stat-tile"><span class="stat-number" id="statStarCount">—</span><span class="stat-label">estrelas conquistadas no GitHub</span></div>
+  </div>
+
+  <div class="itau-highlight">
+    <div class="itau-highlight-label">★ Itaú Unibanco — a maior empresa em que já atuei</div>
+    <div class="stats-grid">
+      <div class="stat-tile"><span class="stat-number">4</span><span class="stat-label">anos como Engenheiro de Software Sênior</span></div>
+      <div class="stat-tile"><span class="stat-number">9</span><span class="stat-label">certificações internas concluídas</span></div>
+      <div class="stat-tile"><span class="stat-number">1</span><span class="stat-label">Prêmio PRAD de Alta Performance (2026)</span></div>
+      <div class="stat-tile"><span class="stat-number">70M</span><span class="stat-label">clientes do Itaú com acesso ao Itaú Shop</span></div>
+      <div class="stat-tile"><span class="stat-number">99,9%</span><span class="stat-label">disponibilidade (SLA) das soluções que mantenho</span></div>
+    </div>
+  </div>
+
   <div class="section-label">~/experiência</div>
   <div class="timeline">
     <div class="timeline-item current">
@@ -727,6 +813,12 @@
     })
     .then(repos => {
       allRepos = repos.filter(r => !r.fork);
+
+      const statRepoCount = document.getElementById('statRepoCount');
+      const statStarCount = document.getElementById('statStarCount');
+      if(statRepoCount) statRepoCount.textContent = allRepos.length;
+      if(statStarCount) statStarCount.textContent = allRepos.reduce((sum, r) => sum + r.stargazers_count, 0);
+
       if(allRepos.length === 0){
         repoGrid.innerHTML = '<div class="repo-empty">Nenhum repositório público encontrado ainda.</div>';
         return;
