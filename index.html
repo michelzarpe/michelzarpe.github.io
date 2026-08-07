@@ -201,6 +201,43 @@
     padding:20px 0;
   }
 
+  .pagination{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:8px;
+    margin:-8px 0 48px;
+  }
+  .pagination button{
+    font-family:'JetBrains Mono', monospace;
+    font-size:0.8rem;
+    color:var(--text);
+    background:transparent;
+    border:1px solid var(--line);
+    padding:8px 12px;
+    border-radius:2px;
+    cursor:pointer;
+    transition:border-color 0.2s ease, color 0.2s ease;
+  }
+  .pagination button:hover:not(:disabled){
+    border-color:var(--accent);
+    color:var(--accent);
+  }
+  .pagination button:disabled{
+    opacity:0.35;
+    cursor:default;
+  }
+  .pagination button.active{
+    border-color:var(--accent);
+    color:var(--accent);
+  }
+  .pagination-info{
+    font-family:'JetBrains Mono', monospace;
+    font-size:0.8rem;
+    color:var(--muted);
+    padding:0 6px;
+  }
+
   .stats-row{
     display:flex;
     flex-wrap:wrap;
@@ -211,6 +248,109 @@
     max-width:100%;
     filter:saturate(0.85);
   }
+
+  .donate-box{
+    display:flex;
+    align-items:center;
+    gap:24px;
+    flex-wrap:wrap;
+    border:1px solid var(--line);
+    background:var(--surface);
+    padding:24px;
+    border-radius:2px;
+    margin-bottom:48px;
+  }
+  .donate-box img{
+    width:120px;
+    height:120px;
+    border-radius:2px;
+    background:#fff;
+    padding:8px;
+    flex-shrink:0;
+  }
+  .donate-info{
+    flex:1;
+    min-width:200px;
+  }
+  .donate-label{
+    font-family:'JetBrains Mono', monospace;
+    font-size:0.75rem;
+    color:var(--muted);
+    margin-bottom:8px;
+  }
+  .donate-address{
+    font-family:'JetBrains Mono', monospace;
+    font-size:0.82rem;
+    color:var(--text);
+    word-break:break-all;
+    background:var(--bg);
+    padding:10px 12px;
+    border:1px solid var(--line);
+    border-radius:2px;
+    margin-bottom:10px;
+  }
+  .copy-btn{
+    font-family:'JetBrains Mono', monospace;
+    font-size:0.8rem;
+    color:var(--accent);
+    background:none;
+    border:1px solid var(--line);
+    padding:8px 14px;
+    border-radius:2px;
+    cursor:pointer;
+    transition:border-color 0.2s ease;
+  }
+  .copy-btn:hover{ border-color:var(--accent); }
+
+  .donate-box{
+    display:flex;
+    flex-wrap:wrap;
+    gap:24px;
+    align-items:center;
+    border:1px solid var(--line);
+    background:var(--surface);
+    padding:24px;
+    border-radius:2px;
+  }
+  .donate-box img{
+    border-radius:2px;
+    flex-shrink:0;
+  }
+  .donate-info{
+    flex:1;
+    min-width:220px;
+  }
+  .donate-label{
+    font-family:'JetBrains Mono', monospace;
+    font-size:0.78rem;
+    color:var(--muted);
+    margin-bottom:8px;
+  }
+  .donate-address{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    flex-wrap:wrap;
+  }
+  .donate-address code{
+    font-family:'JetBrains Mono', monospace;
+    font-size:0.82rem;
+    color:var(--text);
+    word-break:break-all;
+  }
+  .copy-btn{
+    font-family:'JetBrains Mono', monospace;
+    font-size:0.78rem;
+    color:var(--accent);
+    background:transparent;
+    border:1px solid var(--line);
+    padding:6px 12px;
+    border-radius:2px;
+    cursor:pointer;
+    transition:border-color 0.2s ease;
+    white-space:nowrap;
+  }
+  .copy-btn:hover{ border-color:var(--accent); }
 
   footer{
     position:relative;
@@ -258,6 +398,7 @@
   <div class="repo-grid" id="repoGrid">
     <div class="repo-loading">carregando repositórios...</div>
   </div>
+  <div class="pagination" id="repoPagination"></div>
 
   <div class="section-label">~/stats</div>
   <div class="stats-row">
@@ -265,6 +406,28 @@
          alt="Estatísticas do GitHub de michelzarpe" width="380" loading="lazy">
     <img src="https://github-readme-stats.vercel.app/api/top-langs/?username=michelzarpe&layout=compact&hide_title=true&bg_color=1B1A17&text_color=EDE9E0&title_color=C98A3B&border_color=2B2924"
          alt="Linguagens mais usadas por michelzarpe" width="300" loading="lazy">
+  </div>
+  <div class="section-label">~/apoie</div>
+  <div class="donate-box">
+    <img src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=bitcoin:BC1QCGAF08MAMRDPKYYD850NXHYJG2U59YV8PTQF5U"
+         alt="QR code do endereço Bitcoin para doações" loading="lazy">
+    <div class="donate-info">
+      <div class="donate-label">BITCOIN (BTC)</div>
+      <div class="donate-address" id="btcAddress">bc1qcgaf08mamrdpkyyd850nxhyjg2u59yv8ptqf5u</div>
+      <button class="copy-btn" id="copyBtn" type="button">Copiar endereço</button>
+    </div>
+  </div>
+  <div class="section-label">~/apoie</div>
+  <div class="donate-box">
+    <img src="https://api.qrserver.com/v1/create-qr-code/?size=140x140&bgcolor=1B1A17&color=EDE9E0&data=bitcoin:BC1QCGAF08MAMRDPKYYD850NXHYJG2U59YV8PTQF5U"
+         alt="QR code do endereço Bitcoin" width="140" height="140" loading="lazy">
+    <div class="donate-info">
+      <div class="donate-label">BITCOIN (BTC)</div>
+      <div class="donate-address">
+        <code id="btcAddress">BC1QCGAF08MAMRDPKYYD850NXHYJG2U59YV8PTQF5U</code>
+        <button class="copy-btn" id="copyBtn">copiar</button>
+      </div>
+    </div>
   </div>
 </section>
 
@@ -301,7 +464,54 @@
 
   // Busca repositórios públicos via API do GitHub
   const GH_USER = 'michelzarpe';
+  const REPOS_PER_PAGE = 6;
   const repoGrid = document.getElementById('repoGrid');
+  const repoPagination = document.getElementById('repoPagination');
+  let currentPage = 1;
+
+  function renderRepoCards(repos){
+    return repos.map(repo => `
+      <a class="repo-card" href="${repo.html_url}" target="_blank" rel="noopener">
+        <span class="repo-name">${repo.name}</span>
+        <span class="repo-desc">${repo.description ? repo.description : 'Sem descrição.'}</span>
+        <span class="repo-meta">
+          ${repo.language ? `<span class="repo-lang">${repo.language}</span>` : ''}
+          <span>★ ${repo.stargazers_count}</span>
+        </span>
+      </a>
+    `).join('');
+  }
+
+  function renderPagination(totalPages){
+    if(totalPages <= 1){
+      repoPagination.innerHTML = '';
+      return;
+    }
+    let html = `<button type="button" data-page="${currentPage - 1}" ${currentPage === 1 ? 'disabled' : ''}>‹</button>`;
+    for(let i = 1; i <= totalPages; i++){
+      html += `<button type="button" class="${i === currentPage ? 'active' : ''}" data-page="${i}">${i}</button>`;
+    }
+    html += `<button type="button" data-page="${currentPage + 1}" ${currentPage === totalPages ? 'disabled' : ''}>›</button>`;
+    repoPagination.innerHTML = html;
+
+    repoPagination.querySelectorAll('button[data-page]').forEach(btn => {
+      btn.addEventListener('click', () => {
+        currentPage = Number(btn.dataset.page);
+        showPage(currentPage);
+        repoGrid.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      });
+    });
+  }
+
+  let allRepos = [];
+  function showPage(page){
+    const totalPages = Math.max(1, Math.ceil(allRepos.length / REPOS_PER_PAGE));
+    currentPage = Math.min(Math.max(1, page), totalPages);
+    const start = (currentPage - 1) * REPOS_PER_PAGE;
+    const pageRepos = allRepos.slice(start, start + REPOS_PER_PAGE);
+    repoGrid.innerHTML = renderRepoCards(pageRepos);
+    renderPagination(totalPages);
+  }
 
   fetch(`https://api.github.com/users/${GH_USER}/repos?sort=updated&per_page=100`)
     .then(res => {
@@ -309,25 +519,27 @@
       return res.json();
     })
     .then(repos => {
-      const visible = repos.filter(r => !r.fork);
-      if(visible.length === 0){
+      allRepos = repos.filter(r => !r.fork);
+      if(allRepos.length === 0){
         repoGrid.innerHTML = '<div class="repo-empty">Nenhum repositório público encontrado ainda.</div>';
         return;
       }
-      repoGrid.innerHTML = visible.map(repo => `
-        <a class="repo-card" href="${repo.html_url}" target="_blank" rel="noopener">
-          <span class="repo-name">${repo.name}</span>
-          <span class="repo-desc">${repo.description ? repo.description : 'Sem descrição.'}</span>
-          <span class="repo-meta">
-            ${repo.language ? `<span class="repo-lang">${repo.language}</span>` : ''}
-            <span>★ ${repo.stargazers_count}</span>
-          </span>
-        </a>
-      `).join('');
+      showPage(1);
     })
     .catch(() => {
       repoGrid.innerHTML = '<div class="repo-empty">Não foi possível carregar os repositórios agora.</div>';
     });
+
+  // Copiar endereço BTC
+  const copyBtn = document.getElementById('copyBtn');
+  const btcAddress = document.getElementById('btcAddress');
+  copyBtn.addEventListener('click', () => {
+    navigator.clipboard.writeText(btcAddress.textContent.trim()).then(() => {
+      const original = copyBtn.textContent;
+      copyBtn.textContent = 'Copiado!';
+      setTimeout(() => { copyBtn.textContent = original; }, 1800);
+    });
+  });
 </script>
 
 </body>
