@@ -299,6 +299,170 @@
   }
   .copy-btn:hover{ border-color:var(--accent); }
 
+  /* Timeline de experiência */
+  .timeline{
+    position:relative;
+    margin-bottom:48px;
+    padding-left:24px;
+    border-left:1px solid var(--line);
+  }
+  .timeline-item{
+    position:relative;
+    padding-bottom:32px;
+  }
+  .timeline-item:last-child{ padding-bottom:0; }
+  .timeline-item::before{
+    content:"";
+    position:absolute;
+    left:-29px;
+    top:4px;
+    width:9px; height:9px;
+    border-radius:50%;
+    background:var(--bg);
+    border:2px solid var(--accent);
+  }
+  .timeline-item.current::before{
+    background:var(--accent);
+    box-shadow:0 0 0 3px rgba(201,138,59,0.18);
+  }
+  .tl-period{
+    font-family:'JetBrains Mono', monospace;
+    font-size:0.75rem;
+    color:var(--accent);
+    margin-bottom:4px;
+  }
+  .tl-role{
+    font-family:'Fraunces', serif;
+    font-size:1.15rem;
+    font-weight:500;
+    margin-bottom:2px;
+  }
+  .tl-company{
+    font-family:'JetBrains Mono', monospace;
+    font-size:0.82rem;
+    color:var(--muted);
+    margin-bottom:10px;
+  }
+  .tl-desc{
+    font-size:0.92rem;
+    line-height:1.65;
+    color:var(--text);
+    max-width:62ch;
+  }
+
+  /* Formação */
+  .edu-list{
+    display:flex;
+    flex-direction:column;
+    gap:18px;
+    margin-bottom:48px;
+  }
+  .edu-item{
+    display:flex;
+    justify-content:space-between;
+    align-items:baseline;
+    gap:16px;
+    flex-wrap:wrap;
+    border-bottom:1px solid var(--line);
+    padding-bottom:14px;
+  }
+  .edu-item:last-child{ border-bottom:none; }
+  .edu-school{
+    font-size:1rem;
+    color:var(--text);
+  }
+  .edu-degree{
+    font-family:'JetBrains Mono', monospace;
+    font-size:0.78rem;
+    color:var(--muted);
+    display:block;
+    margin-top:2px;
+  }
+  .edu-period{
+    font-family:'JetBrains Mono', monospace;
+    font-size:0.78rem;
+    color:var(--accent);
+    white-space:nowrap;
+  }
+
+  /* Skills */
+  .tag-cloud{
+    display:flex;
+    flex-wrap:wrap;
+    gap:8px;
+    margin-bottom:48px;
+  }
+  .tag{
+    font-family:'JetBrains Mono', monospace;
+    font-size:0.78rem;
+    color:var(--muted);
+    border:1px solid var(--line);
+    padding:6px 12px;
+    border-radius:2px;
+  }
+
+  /* Certificações */
+  .cert-list{
+    display:flex;
+    flex-direction:column;
+    gap:2px;
+    margin-bottom:16px;
+  }
+  .cert-item{
+    display:flex;
+    justify-content:space-between;
+    align-items:baseline;
+    gap:16px;
+    flex-wrap:wrap;
+    padding:10px 0;
+    border-bottom:1px solid var(--line);
+  }
+  .cert-item:last-child{ border-bottom:none; }
+  .cert-name{
+    font-size:0.9rem;
+    color:var(--text);
+  }
+  .cert-meta{
+    font-family:'JetBrains Mono', monospace;
+    font-size:0.72rem;
+    color:var(--muted);
+    white-space:nowrap;
+  }
+  .cert-hidden{ display:none; }
+  .show-more-btn{
+    font-family:'JetBrains Mono', monospace;
+    font-size:0.8rem;
+    color:var(--accent);
+    background:transparent;
+    border:1px solid var(--line);
+    padding:8px 16px;
+    border-radius:2px;
+    cursor:pointer;
+    margin-bottom:48px;
+    transition:border-color 0.2s ease;
+  }
+  .show-more-btn:hover{ border-color:var(--accent); }
+
+  /* Publicação */
+  .pub-box{
+    border:1px solid var(--line);
+    background:var(--surface);
+    padding:20px 24px;
+    border-radius:2px;
+    margin-bottom:48px;
+  }
+  .pub-title{
+    font-size:0.95rem;
+    color:var(--text);
+    margin-bottom:6px;
+  }
+  .pub-meta{
+    font-family:'JetBrains Mono', monospace;
+    font-size:0.78rem;
+    color:var(--muted);
+  }
+  .pub-meta a{ color:var(--accent); text-decoration:none; }
+
   footer{
     position:relative;
     text-align:center;
@@ -328,9 +492,10 @@
   </div>
 
   <p class="bio">
-    Engenheiro de software com foco em construir coisas que funcionam de verdade.
-    Trabalho principalmente com <strong>Java e Spring</strong>, e uso as noites para
-    tirar projetos próprios do papel — deste site em diante.
+    Engenheiro de software sênior no <strong>Itaú Unibanco</strong>, atuando como API Owner e
+    iPaaS Owner. Trabalho com Java, Kotlin, Spring, Micronaut e arquitetura hexagonal,
+    além de AWS, Kubernetes e Kafka. Uso as noites para tirar projetos próprios do papel —
+    deste site em diante.
   </p>
 
   <div class="links">
@@ -341,6 +506,110 @@
 </main>
 
 <section class="projects">
+  <div class="section-label">~/experiência</div>
+  <div class="timeline">
+    <div class="timeline-item current">
+      <div class="tl-period">set 2022 — atual</div>
+      <div class="tl-role">Senior Software Engineer</div>
+      <div class="tl-company">Itaú Unibanco · São Paulo, Brasil</div>
+      <p class="tl-desc">API Owner e iPaaS Owner em time responsável por ferramentas de suporte ao Itaú Shop. Reconhecido em 2026 pelo Programa de Reconhecimento de Alta Performance (PRAD). Trabalho com Spring, Micronaut, Kotlin, Java, Python e Arquitetura Hexagonal, AWS (Terraform), Kubernetes, Jenkins, Kafka, PostgreSQL, Aurora, Redis e DynamoDB.</p>
+    </div>
+    <div class="timeline-item">
+      <div class="tl-period">jul 2022 — set 2022</div>
+      <div class="tl-role">Senior Software Developer</div>
+      <div class="tl-company">Alelo Brasil · São Paulo, Brasil</div>
+      <p class="tl-desc">Novas funcionalidades para o Meu Alelo, com Scrum e Kanban.</p>
+    </div>
+    <div class="timeline-item">
+      <div class="tl-period">jan 2021 — jun 2022</div>
+      <div class="tl-role">Senior Software Developer</div>
+      <div class="tl-company">Ame Digital (via Exactaworks) · São Paulo, Brasil</div>
+      <p class="tl-desc">Atendimento ao cliente (SAC): análise, novas features e suporte com Java, Kotlin, Spring (Webflux, MVC, Cloud), JUnit/Mockito, AWS (CloudWatch, CodePipeline, DynamoDB, SQS), Kibana, NewRelic e DataDog.</p>
+    </div>
+    <div class="timeline-item">
+      <div class="tl-period">jun 2019 — jan 2021</div>
+      <div class="tl-role">Full Stack Engineer</div>
+      <div class="tl-company">Sancon · Joaçaba, Santa Catarina</div>
+      <p class="tl-desc">Arquiteturas SaaS multitenancy, microsserviços e monolito. Back-end em Java/Spring Boot, front-end em Angular 8 e Flutter. Destaque: Smart Operations Panel e a feira de tecnologia Gera019 (~8k usuários).</p>
+    </div>
+    <div class="timeline-item">
+      <div class="tl-period">jul 2018 — dez 2019</div>
+      <div class="tl-role">Autônomo — Startup Graddio</div>
+      <div class="tl-company">Joaçaba, Santa Catarina</div>
+      <p class="tl-desc">Back-end com Spring Boot, front-end com Angular 8/Ionic 4, site institucional, app mobile, web scraping em Python e modelagem de dados SQL.</p>
+    </div>
+    <div class="timeline-item">
+      <div class="tl-period">abr 2016 — jul 2018</div>
+      <div class="tl-role">Analista de Desenvolvimento de Sistemas Pleno</div>
+      <div class="tl-company">Grupo Zanardo / Grupo GPS</div>
+      <p class="tl-desc">Módulos de Gestão Empresarial e RH Senior, migração para linguagem Totvs, front/back/desktop com ExtJS, JavaScript, Java Web/Desktop, PrimeFaces, Oracle, MySQL e SQL Server.</p>
+    </div>
+    <div class="timeline-item">
+      <div class="tl-period">mar 2014 — mar 2016</div>
+      <div class="tl-role">Programador Jr.</div>
+      <div class="tl-company">Sancon · Joaçaba</div>
+      <p class="tl-desc">Módulo de Gestão de Recursos Humanos: folha de pessoal, ponto, refeitório, segurança e medicina, recrutamento. LSP e SQL.</p>
+    </div>
+    <div class="timeline-item">
+      <div class="tl-period">mar 2008 — mar 2014</div>
+      <div class="tl-role">Suporte técnico e impressoras</div>
+      <div class="tl-company">Stefanini / Optec / Rhealeza · Joaçaba</div>
+      <p class="tl-desc">Projeto de cliente externo BRF Brasil Foods — suporte técnico e manutenção de impressoras Lexmark.</p>
+    </div>
+  </div>
+
+  <div class="section-label">~/formação</div>
+  <div class="edu-list">
+    <div class="edu-item">
+      <div>
+        <span class="edu-school">PUC Minas</span>
+        <span class="edu-degree">Pós-graduação Lato Sensu — Especialização, Arquitetura de Soluções</span>
+      </div>
+      <span class="edu-period">abr 2025 — mai 2026</span>
+    </div>
+    <div class="edu-item">
+      <div>
+        <span class="edu-school">Faculdade Facint</span>
+        <span class="edu-degree">Pós-graduação Lato Sensu — Especialização, Machine Learning e MLOps</span>
+      </div>
+      <span class="edu-period">mar 2025 — jan 2026</span>
+    </div>
+    <div class="edu-item">
+      <div>
+        <span class="edu-school">FIAP</span>
+        <span class="edu-degree">Pós-graduação Lato Sensu, Defensive Cyber Security</span>
+      </div>
+      <span class="edu-period">mar 2023 — mar 2024</span>
+    </div>
+    <div class="edu-item">
+      <div>
+        <span class="edu-school">Data Science Academy</span>
+        <span class="edu-degree">Extensão, Engenharia de Blockchain</span>
+      </div>
+      <span class="edu-period">jan 2020 — set 2020</span>
+    </div>
+    <div class="edu-item">
+      <div>
+        <span class="edu-school">Universidade do Oeste de Santa Catarina</span>
+        <span class="edu-degree">Bacharelado, Computer Engineering</span>
+      </div>
+      <span class="edu-period">2012 — 2017</span>
+    </div>
+  </div>
+
+  <div class="section-label">~/skills</div>
+  <div class="tag-cloud" id="tagCloud"></div>
+
+  <div class="section-label">~/certificações</div>
+  <div class="cert-list" id="certList"></div>
+  <button class="show-more-btn" id="certToggle">mostrar todas</button>
+
+  <div class="section-label">~/publicação</div>
+  <div class="pub-box">
+    <div class="pub-title">Desenvolvimento de um sistema para monitoramento de assoreamentos de reservatórios hidroelétricos</div>
+    <div class="pub-meta">jun 2018 · <a href="http://editora.unoesc.edu.br/index.php/acet/article/view/13106" target="_blank" rel="noopener">ler publicação →</a></div>
+  </div>
+
   <div class="section-label">~/projetos</div>
   <div class="repo-grid" id="repoGrid">
     <div class="repo-loading">carregando repositórios...</div>
@@ -476,6 +745,115 @@
       copyBtn.textContent = 'Copiado!';
       setTimeout(() => { copyBtn.textContent = original; }, 1800);
     });
+  });
+
+  // Skills
+  const skills = ["Java","Kotlin","Spring Framework","Spring Boot","Spring MVC","Spring Webflux","Spring Security","Kubernetes","Docker","Docker compose","AWS","Google Cloud Platform","Microservices","APIs","REST","GraphQL","Arquitetura MVC","DevOps","Python","JavaScript","TypeScript","Node.js","C#","ASP.NET","C","Microchip PIC","SQL","MySQL","PostgreSQL","Microsoft SQL Server","MongoDB","NoSql","SQLite","H2","ElasticSearch","JPA","Hibernate","JSON","Git","Linux","JUnit","OOP","Scrum","Metodologias ágeis","Ionic Framework","Desenvolvimento Android","Desenvolvimento de sites","Blockchain","Solidity"];
+  document.getElementById('tagCloud').innerHTML = skills.map(s => `<span class="tag">${s}</span>`).join('');
+
+  // Certificações (mais recentes primeiro)
+  const certs = [
+    ["Exame Teórico PGMLOps — Pós-Graduação em ML e MLOps","Data Science Academy","dez 2025"],
+    ["MLOps e Ciclo de Vida de Modelos de Machine Learning","Data Science Academy","nov 2025"],
+    ["Machine Learning Para Aplicações Biomédicas","Data Science Academy","out 2025"],
+    ["Deep Learning Para Aplicações de IA com Python e C++","Data Science Academy","set 2025"],
+    ["Databricks Fundamentals Accreditation","Databricks","ago 2025"],
+    ["Desenvolvimento e Deploy de Modelos de Machine Learning","Data Science Academy","jul 2025"],
+    ["Arquitetura de Soluções Foundation (pt-BR)","Itaú Unibanco","jun 2025"],
+    ["Matemática e Estatística Aplicada para Data Science, ML e IA","Data Science Academy","mai 2025"],
+    ["Ipaas Digibee — Trained","Itaú Unibanco","fev 2025"],
+    ["Introdução ao Solidity","Udemy","out 2024"],
+    ["Api Owners Professional","Itaú Unibanco","out 2024"],
+    ["Introduction to Application Performance Monitoring","Datadog","set 2024"],
+    ["Terraform: básico ao avançado","Udemy","set 2024"],
+    ["Datadog Foundation","Datadog","mai 2024"],
+    ["Introduction to Observability","Datadog","mai 2024"],
+    ["Associate — Generative AI","Itaú Unibanco","mai 2024"],
+    ["Practitioner — Generative AI","Itaú Unibanco","mar 2024"],
+    ["Inteligência Artificial: Carreira do futuro","EXAME","mar 2024"],
+    ["iPaaS Owner","Digibee","mar 2024"],
+    ["Projetando sistemas resilientes para Alteração de Demanda","Itaú Unibanco","fev 2024"],
+    ["Formação Boas Práticas em Java","Alura","fev 2024"],
+    ["Boas práticas de programação: automatizando testes com Java","Alura","fev 2024"],
+    ["Boas práticas de programação: melhore o código de uma API Java","Alura","fev 2024"],
+    ["Java e refatoração: melhorando códigos com boas práticas","Alura","jan 2024"],
+    ["Kafka e Spring: integrando aplicações e gerenciando fluxos de dados","Alura","jan 2024"],
+    ["Practitioner — Quantum Computing","Itaú Unibanco","dez 2023"],
+    ["SOLID com Java: princípios da POO","Alura","set 2023"],
+    ["Privacy Champion","Itaú Unibanco","ago 2023"],
+    ["Formação Amazon Web Services","Alura","jul 2023"],
+    ["Amazon Elastic Beanstalk Parte 2: containers e NGINX","Alura","jul 2023"],
+    ["Amazon Elastic Beanstalk Parte 1: container Docker","Alura","jul 2023"],
+    ["Amazon ECS: gerencie Docker na nuvem da AWS","Alura","jun 2023"],
+    ["Amazon Cloud Front e Route53","Alura","mai 2023"],
+    ["Deploy no Amazon EC2","Alura","mai 2023"],
+    ["Amazon VPC: provisione uma nuvem privada","Alura","mai 2023"],
+    ["Amazon S3: manipule e armazene objetos na nuvem","Alura","mai 2023"],
+    ["Amazon Lightsail: descomplicando a nuvem","Alura","mai 2023"],
+    ["Amazon CloudWatch: visibilidade completa","Alura","mai 2023"],
+    ["Practitioner — D&A Foundation","Itaú Unibanco","mar 2023"],
+    ["Jenkins em larga escala via Docker e Kubernetes","Udemy","mar 2023"],
+    ["Data Science e Machine Learning com estatística e Python","Udemy","mar 2023"],
+    ["ChatGPT e ChatGPT Plus: 200 prompts","Udemy","mar 2023"],
+    ["Event-Driven Microservices, CQRS, SAGA, Axon, Spring Boot","Udemy","jan 2023"],
+    ["AWS Serverless com TypeScript e AWS CDK","Udemy","nov 2022"],
+    ["Micronaut e gRPC — projeto do zero com Kotlin","Udemy","—"],
+    ["Microservices com Kotlin e Micronaut","Udemy","set 2022"],
+    ["Criando microsserviços em Java com AWS ECS Fargate e CDK","Udemy","jul 2022"],
+    ["Api GraphQL com Spring Boot","Udemy","nov 2021"],
+    ["Engenheiro Blockchain","Udemy","mai 2021"],
+    ["Programa de Pré-incubação de projetos","Cocreation Lab","abr 2021"],
+    ["Testes unitários em Java com JUnit e Mockito","Udemy","fev 2021"],
+    ["Microsserviços Java com Spring Boot e Spring Cloud","Udemy","nov 2020"],
+    ["Spring Boot Microservices and Spring Cloud","Udemy","nov 2020"],
+    ["Formação Engenheiro Blockchain","Data Science Academy","set 2020"],
+    ["Microservice inspirado no Spotify com SpringCloud e Kafka","Udemy","set 2020"],
+    ["Inteligência Artificial Aplicada a Finanças","Data Science Academy","set 2020"],
+    ["Azure DevOps — Integração e Entrega Contínua","Udemy","set 2020"],
+    ["RESTFul com Spring Boot utilizando TDD, CI e CD","Udemy","set 2020"],
+    ["Docker","Udemy","ago 2020"],
+    ["Deep Learning II","Data Science Academy","jul 2020"],
+    ["Deep Learning I","Data Science Academy","jun 2020"],
+    ["Desenvolvimento de aplicações Descentralizadas","Data Science Academy","jun 2020"],
+    ["NodeJS, Restify, Mongoose, MongoDB + deploy Digital Ocean","Udemy","mai 2020"],
+    ["LGPD — Lei Geral de Proteção dos Dados","Udemy","dez 2019"],
+    ["Governança de dados","Data Science Academy","jun 2019"],
+    ["Programação para Blockchain","Data Science Academy","abr 2019"],
+    ["Blockchain Fundamentos","Data Science Academy","jan 2019"],
+    ["Python Fundamentos para Análise de Dados","Data Science Academy","—"],
+    ["I Simpósio Integrado das Engenharias ACET","UNOESC","—"],
+    ["FLISol","Flisol","—"],
+    ["Gestão Ágil com Scrum","Udemy","—"],
+    ["ASP.NET (C#) — Programação em camadas","Udemy","—"],
+    ["Desenvolvimento Android","Udemy","—"],
+    ["Spring Boot, Hibernate, REST, Ionic, JWT, S3, MySQL e MongoDB","Udemy","—"],
+    ["C# Programação Orientada a Objetos","Udemy","—"],
+    ["UML — Guia Básico para Análise e Projeto de Sistemas","Udemy","—"],
+    ["Python para Data Science e Machine Learning","Udemy","—"],
+    ["Startup Weekend Joaçaba","Techstars","—"],
+    ["Certificação Digital","Intel Corporation","—"],
+    ["Fundamentos em computação na nuvem com Azure","BrasilMaisTi","—"],
+    ["Big Data Fundamentos","Data Science Academy","—"],
+    ["Big Data, Data Science e ML com GCP e BigQuery","Data Science Academy","—"],
+  ];
+
+  const CERTS_VISIBLE = 8;
+  const certList = document.getElementById('certList');
+  const certToggle = document.getElementById('certToggle');
+  certList.innerHTML = certs.map((c, i) => `
+    <div class="cert-item ${i >= CERTS_VISIBLE ? 'cert-hidden' : ''}" data-idx="${i}">
+      <span class="cert-name">${c[0]}</span>
+      <span class="cert-meta">${c[1]} · ${c[2]}</span>
+    </div>
+  `).join('');
+  certToggle.textContent = `mostrar todas (${certs.length})`;
+  let certsExpanded = false;
+  certToggle.addEventListener('click', () => {
+    certsExpanded = !certsExpanded;
+    certList.querySelectorAll('.cert-item').forEach((el, i) => {
+      if(i >= CERTS_VISIBLE) el.classList.toggle('cert-hidden', !certsExpanded);
+    });
+    certToggle.textContent = certsExpanded ? 'mostrar menos' : `mostrar todas (${certs.length})`;
   });
 </script>
 
