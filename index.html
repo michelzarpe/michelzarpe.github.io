@@ -123,6 +123,95 @@
     transform:translateY(-2px);
   }
 
+  section.projects{
+    position:relative;
+    max-width:760px;
+    margin:0 auto;
+    padding:0 28px 10vh;
+  }
+
+  .section-label{
+    font-family:'JetBrains Mono', monospace;
+    font-size:0.8rem;
+    color:var(--muted);
+    letter-spacing:0.04em;
+    display:flex;
+    align-items:center;
+    gap:12px;
+    margin-bottom:28px;
+  }
+  .section-label::after{
+    content:"";
+    flex:1;
+    height:1px;
+    background:var(--line);
+  }
+
+  .repo-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fill, minmax(240px, 1fr));
+    gap:14px;
+    margin-bottom:48px;
+  }
+
+  .repo-card{
+    border:1px solid var(--line);
+    background:var(--surface);
+    padding:20px;
+    border-radius:2px;
+    text-decoration:none;
+    color:var(--text);
+    display:flex;
+    flex-direction:column;
+    gap:10px;
+    transition:border-color 0.2s ease, transform 0.2s ease;
+  }
+  .repo-card:hover{
+    border-color:var(--accent);
+    transform:translateY(-2px);
+  }
+  .repo-name{
+    font-family:'JetBrains Mono', monospace;
+    font-size:0.95rem;
+    color:var(--accent);
+  }
+  .repo-desc{
+    font-size:0.88rem;
+    line-height:1.5;
+    color:var(--muted);
+    flex:1;
+  }
+  .repo-meta{
+    font-family:'JetBrains Mono', monospace;
+    font-size:0.75rem;
+    color:var(--muted);
+    display:flex;
+    gap:14px;
+  }
+  .repo-lang::before{
+    content:"●";
+    color:var(--accent);
+    margin-right:5px;
+  }
+
+  .repo-loading, .repo-empty{
+    font-family:'JetBrains Mono', monospace;
+    font-size:0.85rem;
+    color:var(--muted);
+    padding:20px 0;
+  }
+
+  .stats-row{
+    display:flex;
+    flex-wrap:wrap;
+    gap:16px;
+  }
+  .stats-row img{
+    border-radius:2px;
+    max-width:100%;
+    filter:saturate(0.85);
+  }
+
   footer{
     position:relative;
     text-align:center;
@@ -164,6 +253,21 @@
   </div>
 </main>
 
+<section class="projects">
+  <div class="section-label">~/projetos</div>
+  <div class="repo-grid" id="repoGrid">
+    <div class="repo-loading">carregando repositórios...</div>
+  </div>
+
+  <div class="section-label">~/stats</div>
+  <div class="stats-row">
+    <img src="https://github-readme-stats.vercel.app/api?username=michelzarpe&show_icons=true&hide_title=true&bg_color=1B1A17&text_color=EDE9E0&icon_color=C98A3B&title_color=C98A3B&border_color=2B2924"
+         alt="Estatísticas do GitHub de michelzarpe" width="380" loading="lazy">
+    <img src="https://github-readme-stats.vercel.app/api/top-langs/?username=michelzarpe&layout=compact&hide_title=true&bg_color=1B1A17&text_color=EDE9E0&title_color=C98A3B&border_color=2B2924"
+         alt="Linguagens mais usadas por michelzarpe" width="300" loading="lazy">
+  </div>
+</section>
+
 <footer>
   michelzarpelon.com.br · desde 2026
 </footer>
@@ -194,6 +298,36 @@
     setTimeout(tick, deleting ? 35 : 55);
   }
   tick();
+
+  // Busca repositórios públicos via API do GitHub
+  const GH_USER = 'michelzarpe';
+  const repoGrid = document.getElementById('repoGrid');
+
+  fetch(`https://api.github.com/users/${GH_USER}/repos?sort=updated&per_page=100`)
+    .then(res => {
+      if(!res.ok) throw new Error('Falha ao buscar repositórios');
+      return res.json();
+    })
+    .then(repos => {
+      const visible = repos.filter(r => !r.fork);
+      if(visible.length === 0){
+        repoGrid.innerHTML = '<div class="repo-empty">Nenhum repositório público encontrado ainda.</div>';
+        return;
+      }
+      repoGrid.innerHTML = visible.map(repo => `
+        <a class="repo-card" href="${repo.html_url}" target="_blank" rel="noopener">
+          <span class="repo-name">${repo.name}</span>
+          <span class="repo-desc">${repo.description ? repo.description : 'Sem descrição.'}</span>
+          <span class="repo-meta">
+            ${repo.language ? `<span class="repo-lang">${repo.language}</span>` : ''}
+            <span>★ ${repo.stargazers_count}</span>
+          </span>
+        </a>
+      `).join('');
+    })
+    .catch(() => {
+      repoGrid.innerHTML = '<div class="repo-empty">Não foi possível carregar os repositórios agora.</div>';
+    });
 </script>
 
 </body>
