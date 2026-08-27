@@ -548,6 +548,54 @@
   .itau-highlight .stat-tile{
     background:var(--bg);
   }
+  .badge-gallery-label{
+    font-family:'JetBrains Mono', monospace;
+    font-size:0.72rem;
+    color:var(--muted);
+    margin-bottom:10px;
+  }
+  .badge-gallery-label a{
+    color:var(--accent);
+    text-decoration:none;
+    border-bottom:1px solid rgba(201,138,59,0.4);
+  }
+  .badge-gallery-label a:hover{ border-bottom-color:var(--accent); }
+  .badge-gallery{
+    display:flex;
+    flex-wrap:wrap;
+    gap:14px;
+    margin-bottom:6px;
+  }
+  .badge-item{
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    width:86px;
+    text-align:center;
+    text-decoration:none;
+  }
+  .badge-item img{
+    width:70px;
+    height:70px;
+    object-fit:contain;
+    background:var(--bg);
+    border:1px solid var(--line);
+    border-radius:6px;
+    padding:6px;
+    transition:border-color .15s ease, transform .15s ease;
+  }
+  .badge-item:hover img{
+    border-color:var(--accent);
+    transform:translateY(-2px);
+  }
+  .badge-item span{
+    margin-top:6px;
+    font-family:'JetBrains Mono', monospace;
+    font-size:0.6rem;
+    line-height:1.25;
+    color:var(--muted);
+  }
+  .badge-item:hover span{ color:var(--accent); }
 
   footer{
     position:relative;
@@ -597,7 +645,7 @@
     <div class="stat-tile"><span class="stat-number">18+</span><span class="stat-label">anos de carreira em TI</span></div>
     <div class="stat-tile"><span class="stat-number">12</span><span class="stat-label">anos como desenvolvedor de software</span></div>
     <div class="stat-tile"><span class="stat-number">7</span><span class="stat-label">empresas e times por onde passei</span></div>
-    <div class="stat-tile"><span class="stat-number">82</span><span class="stat-label">certificações concluídas</span></div>
+    <div class="stat-tile"><span class="stat-number">84</span><span class="stat-label">certificações concluídas</span></div>
     <div class="stat-tile"><span class="stat-number">49</span><span class="stat-label">tecnologias no portfólio de skills</span></div>
     <div class="stat-tile"><span class="stat-number">17</span><span class="stat-label">cursos em Data Science Academy (ML, Deep Learning, Blockchain)</span></div>
     <div class="stat-tile"><span class="stat-number">28</span><span class="stat-label">cursos concluídos na Udemy</span></div>
@@ -620,6 +668,46 @@
       <div class="stat-tile"><span class="stat-number">1</span><span class="stat-label">Prêmio PRAD de Alta Performance (2026)</span></div>
       <div class="stat-tile"><span class="stat-number">70M</span><span class="stat-label">clientes do Itaú com acesso ao Itaú Shop</span></div>
       <div class="stat-tile"><span class="stat-number">99,9%</span><span class="stat-label">disponibilidade (SLA) das soluções que mantenho</span></div>
+    </div>
+
+    <div class="badge-gallery-label">badges verificados no <a href="https://www.credly.com/users/michel-elimar-zarpelon" target="_blank" rel="noopener">Credly ↗</a></div>
+    <div class="badge-gallery">
+      <a class="badge-item" href="https://www.credly.com/badges/6482da1b-9b04-4a3f-b489-7264d27d65c4/public_url" target="_blank" rel="noopener">
+        <img src="https://images.credly.com/images/dbbbaffb-5117-4da2-9b03-eae604acbf51/image.png" alt="Badge: Associate - Data Modelling (pt-BR)" loading="lazy">
+        <span>Associate — Data Modelling</span>
+      </a>
+      <a class="badge-item" href="https://www.credly.com/badges/9df2d27f-99d1-4ac1-a399-40983dae257f/public_url" target="_blank" rel="noopener">
+        <img src="https://images.credly.com/images/e9d62c8e-b435-4cc4-a4f3-3b86d6ba1afb/blob" alt="Badge: Qualidade em Mudanças - Trained (pt-BR)" loading="lazy">
+        <span>Qualidade em Mudanças</span>
+      </a>
+      <a class="badge-item" href="https://www.credly.com/badges/269f0ca5-3844-45c5-b540-dd712d25fca3/public_url" target="_blank" rel="noopener">
+        <img src="https://images.credly.com/images/e88bc4a2-9b3f-4645-ba36-c6c8bb54c3b5/image.png" alt="Badge: Arquitetura de Soluções Foundation (pt-BR)" loading="lazy">
+        <span>Arquitetura de Soluções Foundation</span>
+      </a>
+      <a class="badge-item" href="https://www.credly.com/badges/cac2208f-e696-4f0e-bded-49a5155ca27e/public_url" target="_blank" rel="noopener">
+        <img src="https://images.credly.com/images/0ee35353-7cce-4013-9c53-841f8d15c973/blob" alt="Badge: Ipaas Digibee - Trained" loading="lazy">
+        <span>iPaaS Digibee — Trained</span>
+      </a>
+      <a class="badge-item" href="https://www.credly.com/badges/faa54536-65b4-4885-9a18-064f05c5930b/public_url" target="_blank" rel="noopener">
+        <img src="https://images.credly.com/images/c7c17474-15b2-4b42-9036-8f8aaaa7e117/image.png" alt="Badge: Associate - Generative AI" loading="lazy">
+        <span>Associate — Generative AI</span>
+      </a>
+      <a class="badge-item" href="https://www.credly.com/badges/505fb64d-fd7d-4fca-9b99-b1c2466e335c/public_url" target="_blank" rel="noopener">
+        <img src="https://images.credly.com/images/5cf2a8a1-39cb-4d5b-a535-74bc8895b4d3/image.png" alt="Badge: Associate - Privacy Champion" loading="lazy">
+        <span>Associate — Privacy Champion</span>
+      </a>
+      <a class="badge-item" href="https://www.credly.com/badges/692bfd39-5963-4384-b133-7f3673174ac6/public_url" target="_blank" rel="noopener">
+        <img src="https://images.credly.com/images/3bb81f31-b826-4462-8758-d25d2d43083c/image.png" alt="Badge: Practitioner - Generative AI" loading="lazy">
+        <span>Practitioner — Generative AI</span>
+      </a>
+      <a class="badge-item" href="https://www.credly.com/badges/8c60a45e-0c07-4f6c-bfa3-e65afd2a6de1/public_url" target="_blank" rel="noopener">
+        <img src="https://images.credly.com/images/6a6e8118-b9d1-4bef-9255-5142376d0a0c/image.png" alt="Badge: Practitioner - Quantum Computing" loading="lazy">
+        <span>Practitioner — Quantum Computing</span>
+      </a>
+      <a class="badge-item" href="https://www.credly.com/badges/023179aa-4042-45e2-ac0f-d8a2b7d7459b/public_url" target="_blank" rel="noopener">
+        <img src="https://images.credly.com/images/3151b077-3f06-49e8-b319-e4ef69bb19ec/image.png" alt="Badge: Practitioner - D&A Foundation" loading="lazy">
+        <span>Practitioner — D&A Foundation</span>
+      </a>
     </div>
   </div>
 
@@ -880,11 +968,13 @@
 
   // Certificações (mais recentes primeiro)
   const certs = [
+    ["Associate — Data Modelling (pt-BR)","Itaú Unibanco","abr 2026"],
     ["Exame Teórico PGMLOps — Pós-Graduação em ML e MLOps","Data Science Academy","dez 2025"],
     ["MLOps e Ciclo de Vida de Modelos de Machine Learning","Data Science Academy","nov 2025"],
     ["Machine Learning Para Aplicações Biomédicas","Data Science Academy","out 2025"],
     ["Deep Learning Para Aplicações de IA com Python e C++","Data Science Academy","set 2025"],
     ["Databricks Fundamentals Accreditation","Databricks","ago 2025"],
+    ["Qualidade em Mudanças — Trained (pt-BR)","Itaú Unibanco","jul 2025"],
     ["Desenvolvimento e Deploy de Modelos de Machine Learning","Data Science Academy","jul 2025"],
     ["Arquitetura de Soluções Foundation (pt-BR)","Itaú Unibanco","jun 2025"],
     ["Matemática e Estatística Aplicada para Data Science, ML e IA","Data Science Academy","mai 2025"],
