@@ -652,7 +652,7 @@
     <div class="stat-tile"><span class="stat-number">16</span><span class="stat-label">cursos concluídos na Alura</span></div>
     <div class="stat-tile"><span class="stat-number">3</span><span class="stat-label">certificações Datadog em observabilidade</span></div>
     <div class="stat-tile"><span class="stat-number">5</span><span class="stat-label">formações acadêmicas (bacharelado + pós/extensões)</span></div>
-    <div class="stat-tile"><span class="stat-number">2</span><span class="stat-label">pós-graduações simultâneas em andamento</span></div>
+    <div class="stat-tile"><span class="stat-number">3</span><span class="stat-label">pós-graduações Lato Sensu concluídas</span></div>
     <div class="stat-tile"><span class="stat-number">1</span><span class="stat-label">artigo científico publicado</span></div>
     <div class="stat-tile"><span class="stat-number">6</span><span class="stat-label">linguagens de programação dominadas</span></div>
     <div class="stat-tile"><span class="stat-number">3+</span><span class="stat-label">ferramentas de IA no fluxo de trabalho diário</span></div>
@@ -876,6 +876,8 @@
   // Busca repositórios públicos via API do GitHub
   const GH_USER = 'michelzarpe';
   const REPOS_PER_PAGE = 6;
+  // Repositórios que não devem aparecer no site, mesmo se tornados públicos
+  const REPO_DENYLIST = ['doula_back', 'doula-Brasil', 'doula-brasil'];
   const repoGrid = document.getElementById('repoGrid');
   const repoPagination = document.getElementById('repoPagination');
   let currentPage = 1;
@@ -930,7 +932,7 @@
       return res.json();
     })
     .then(repos => {
-      allRepos = repos.filter(r => !r.fork);
+      allRepos = repos.filter(r => !r.fork && !REPO_DENYLIST.includes(r.name));
 
       const statRepoCount = document.getElementById('statRepoCount');
       const statStarCount = document.getElementById('statStarCount');
