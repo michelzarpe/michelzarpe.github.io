@@ -225,6 +225,17 @@
     color:var(--accent);
     margin-right:5px;
   }
+  .repo-ai-badge{
+    display:inline-block;
+    font-family:'JetBrains Mono', monospace;
+    font-size:0.7rem;
+    letter-spacing:0.04em;
+    color:var(--accent);
+    border:1px solid var(--accent);
+    border-radius:2px;
+    padding:1px 6px;
+    align-self:flex-start;
+  }
 
   .repo-loading, .repo-empty{
     font-family:'JetBrains Mono', monospace;
@@ -876,23 +887,32 @@
   // Busca repositórios públicos via API do GitHub
   const GH_USER = 'michelzarpe';
   const REPOS_PER_PAGE = 6;
-  // Repositórios que não devem aparecer no site, mesmo se tornados públicos
-  const REPO_DENYLIST = ['doula_back', 'doula-Brasil', 'doula-brasil'];
+  // Projetos de IA: ficam fixados no início da listagem (inclusive forks de estudo)
+  const AI_REPOS = ['rag-spring-ai', 'langchain4j', 'demo-rag-local', 'Python_DataScience_MachineLearning'];
+  const AI_REPO_DESCRIPTIONS = {
+    'rag-spring-ai': 'Estudo de RAG (Retrieval-Augmented Generation) com Spring AI e Java.',
+    'langchain4j': 'Estudo de LangChain4j para construção de aplicações com LLMs em Java.'
+  };
   const repoGrid = document.getElementById('repoGrid');
   const repoPagination = document.getElementById('repoPagination');
   let currentPage = 1;
 
   function renderRepoCards(repos){
-    return repos.map(repo => `
+    return repos.map(repo => {
+      const isAi = AI_REPOS.includes(repo.name);
+      const description = repo.description || AI_REPO_DESCRIPTIONS[repo.name] || 'Sem descrição.';
+      return `
       <a class="repo-card" href="${repo.html_url}" target="_blank" rel="noopener">
+        ${isAi ? '<span class="repo-ai-badge">IA</span>' : ''}
         <span class="repo-name">${repo.name}</span>
-        <span class="repo-desc">${repo.description ? repo.description : 'Sem descrição.'}</span>
+        <span class="repo-desc">${description}</span>
         <span class="repo-meta">
           ${repo.language ? `<span class="repo-lang">${repo.language}</span>` : ''}
           <span>★ ${repo.stargazers_count}</span>
         </span>
       </a>
-    `).join('');
+    `;
+    }).join('');
   }
 
   function renderPagination(totalPages){
@@ -932,7 +952,15 @@
       return res.json();
     })
     .then(repos => {
-      allRepos = repos.filter(r => !r.fork && !REPO_DENYLIST.includes(r.name));
+      allRepos = repos.filter(r => !r.fork || AI_REPOS.includes(r.name));
+      allRepos.sort((a, b) => {
+        const aIsAi = AI_REPOS.includes(a.name);
+        const bIsAi = AI_REPOS.includes(b.name);
+        if(aIsAi && !bIsAi) return -1;
+        if(!aIsAi && bIsAi) return 1;
+        if(aIsAi && bIsAi) return AI_REPOS.indexOf(a.name) - AI_REPOS.indexOf(b.name);
+        return 0;
+      });
 
       const statRepoCount = document.getElementById('statRepoCount');
       const statStarCount = document.getElementById('statStarCount');
